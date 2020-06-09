@@ -1,26 +1,43 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
+import Navbar from './components/Navbar';
 import './App.css';
+ 
+import {Provider} from 'react-redux'
+import store from './store';
+import { Dashboard } from './components/Dashboard';
+import {BrowserRouter,Route,Switch} from 'react-router-dom'
+import { Footer } from './components/Footer';
+import AddBook from './components/AddBook';
+import UpdateBook from './components/UpdateBook';
+import SignUp from './components/SignUp';
+import SignIn from './components/SignIn';
+import ShoppingCart from './components/ShoppingCart';
 
-function App() {
+
+class  App extends Component {
+ render() {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <Provider store={store}>
+       <div className="App">
+       
+     <BrowserRouter>
+     <Navbar />
+     <Switch>
+        
+       <Route exact path="/" component={Dashboard} />
+       <Route   path="/addBook" component={AddBook} />
+       <Route   path="/updateBook/:id" component={UpdateBook} />
+       <Route   path="/cart" component={ShoppingCart} />
+       <Route   path="/signUp" component={SignUp} />
+       <Route   path="/signIn" component={SignIn} />
+        </Switch>
+         
+     </BrowserRouter>
     </div>
+    </Provider>
   );
+ }
 }
 
 export default App;
